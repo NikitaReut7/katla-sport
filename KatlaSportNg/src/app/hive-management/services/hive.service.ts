@@ -23,8 +23,8 @@ export class HiveService {
   }
 
   getHiveSections(hiveId: number): Observable<Array<HiveSectionListItem>> {
-    return null;
-  }
+  return this.http.get<Array<HiveSectionListItem>>(`${this.url}${hiveId}/sections`);
+}
 
   addHive(hive: Hive): Observable<Hive> {
     return null;
