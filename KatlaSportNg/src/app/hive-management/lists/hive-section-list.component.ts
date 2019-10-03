@@ -30,11 +30,11 @@ export class HiveSectionListComponent implements OnInit {
 
   onDelete(hiveSectionId: number) {
     var hiveSection = this.hiveSections.find(h => h.id == hiveSectionId);
-    this.hiveService.setHiveSectionStatus(hiveSectionId, true).subscribe(c => hiveSection.isDeleted = false);
+    this.hiveService.setHiveSectionStatus(hiveSectionId, true).subscribe(c => hiveSection.isDeleted = true);
   }
 
   onUndelete(hiveSectionId: number) {
   var hiveSection = this.hiveSections.find(h => h.id == hiveSectionId);
-  this.hiveService.setHiveSectionStatus(hiveSectionId, true).subscribe(c => hiveSection.isDeleted = true);
+  this.hiveService.setHiveSectionStatus(hiveSectionId, false).subscribe(c => hiveSection.isDeleted = false);
   }
 }
