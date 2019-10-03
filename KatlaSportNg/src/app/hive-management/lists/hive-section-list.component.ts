@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HiveSectionListItem } from '../models/hive-section-list-item';
+import { HiveSectionService } from '../services/hive-section.service';
 import { HiveService } from '../services/hive.service';
 
 @Component({
@@ -16,13 +17,24 @@ export class HiveSectionListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private hiveService: HiveService
+    private hiveService: HiveSectionService,
+    private hiveService1: HiveService
   ) { }
 
   ngOnInit() {
   this.route.params.subscribe(p => {
     this.hiveId = p['id'];
-    this.hiveService.getHiveSections(this.hiveId).subscribe(s => this.hiveSections = s);
+    this.hiveService1.getHiveSections(this.hiveId).subscribe(s => this.hiveSections = s);
   })
 }
+
+  onDelete(hiveSectionId: number) {
+    var hiveSection = this.hiveSections.find(h => h.id == hiveSectionId);
+    this.hiveService.setHiveSectionStatus(hiveSectionId, true).subscribe(c => hiveSection.isDeleted = false);
+  }
+
+  onUndelete(hiveSectionId: number) {
+  var hiveSection = this.hiveSections.find(h => h.id == hiveSectionId);
+  this.hiveService.setHiveSectionStatus(hiveSectionId, true).subscribe(c => hiveSection.isDeleted = true);
+  }
 }
