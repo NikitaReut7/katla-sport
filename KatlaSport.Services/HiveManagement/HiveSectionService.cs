@@ -71,6 +71,7 @@ namespace KatlaSport.Services.HiveManagement
             _context.Sections.Add(dbHiveSection);
 
             await _context.SaveChangesAsync();
+
             return Mapper.Map<HiveSection>(dbHiveSection);
         }
 

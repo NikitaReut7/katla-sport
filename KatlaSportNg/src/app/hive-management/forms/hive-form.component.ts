@@ -55,4 +55,3 @@ export class HiveFormComponent implements OnInit {
     this.hiveService.deleteHive(this.hive.id).subscribe(c => this.navigateToHives());
   }
 }
-

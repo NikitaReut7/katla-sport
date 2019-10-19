@@ -17,23 +17,23 @@ export class HiveSectionListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private hiveService: HiveSectionService,
-    private hiveService1: HiveService
+    private hiveSectionService: HiveSectionService,
+    private hiveService: HiveService
   ) { }
 
   ngOnInit() {
   this.route.params.subscribe(p => {
     this.hiveId = p['id'];
-    this.hiveService1.getHiveSections(this.hiveId).subscribe(s => this.hiveSections = s);
+    this.hiveService.getHiveSections(this.hiveId).subscribe(s => this.hiveSections = s);
   })
 }
   onUndelete(hiveSectionId: number) {
   var hiveSection = this.hiveSections.find(h => h.id == hiveSectionId);
-  this.hiveService.setHiveSectionStatus(hiveSectionId, false).subscribe(c => hiveSection.isDeleted = false);
+  this.hiveSectionService.setHiveSectionStatus(hiveSectionId, false).subscribe(c => hiveSection.isDeleted = false);
   }
   
    onDelete(hiveSectionId: number) {
     var hiveSection = this.hiveSections.find(h => h.id == hiveSectionId);
-    this.hiveService.setHiveSectionStatus(hiveSectionId, true).subscribe(c => hiveSection.isDeleted = true);
+    this.hiveSectionService.setHiveSectionStatus(hiveSectionId, true).subscribe(c => hiveSection.isDeleted = true);
   }
 }
